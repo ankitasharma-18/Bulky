@@ -4,6 +4,7 @@ using Bulky.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulky.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240402192051_addCompanyTable")]
+    partial class addCompanyTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +77,8 @@ namespace Bulky.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -93,38 +95,6 @@ namespace Bulky.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Tech City",
-                            Name = "Tech Solution",
-                            PhoneNumber = "8989898989",
-                            PostalCode = "12121",
-                            State = "IL",
-                            StreetAddress = "123 tech st"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "vid City",
-                            Name = "books Solution",
-                            PhoneNumber = "7070707070",
-                            PostalCode = "12312",
-                            State = "NJ",
-                            StreetAddress = "123 vid st"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Land City",
-                            Name = "Readers club",
-                            PhoneNumber = "6868686868",
-                            PostalCode = "99999",
-                            State = "NY",
-                            StreetAddress = "123 land st"
-                        });
                 });
 
             modelBuilder.Entity("Bulky.Models.Product", b =>
